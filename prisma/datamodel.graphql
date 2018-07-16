@@ -1,0 +1,37 @@
+enum RecordType {
+  ACTIVITY
+  TRAINING
+}
+
+type Record {
+  date: DateTime!
+  counts: [Int!]!
+  progress: Float!
+  type: RecordType!
+}
+
+type Activity {
+  id: ID! @unique
+  name: String! @unique
+  unit: String!
+  records: [Record!]!
+}
+
+type TrainingList {
+  id: ID! @unique
+  activities: [Activity!]!
+}
+
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String
+  activities: [Activity!]!
+  trainings: [TrainingList!]!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
